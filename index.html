@@ -2,240 +2,165 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>مزاد اللوحات</title>
 
 <style>
-
 body{
-margin:0;
-padding:20px;
-background:#f2f2f2;
-font-family:Tahoma,Arial;
+background:#111;
+font-family:Tahoma;
 text-align:center;
+padding:20px;
+color:white;
 }
 
-h2{
-margin-bottom:20px;
+h1{
+margin-bottom:25px;
 }
 
 .controls{
-background:#fff;
-padding:15px;
-border-radius:12px;
-max-width:1200px;
-margin:auto;
-margin-bottom:20px;
-box-shadow:0 2px 10px rgba(0,0,0,.1);
+margin-bottom:30px;
 }
 
-input,select,button{
-padding:10px;
-font-size:20px;
+input{
+padding:12px;
+font-size:22px;
+width:160px;
 margin:5px;
 text-align:center;
 }
 
 button{
-background:#1d7f2f;
-color:white;
-border:none;
-border-radius:6px;
+padding:12px 25px;
+font-size:22px;
 cursor:pointer;
 }
 
 .plate{
+width:700px;
+max-width:95%;
+height:240px;
 background:white;
-border:4px solid #222;
-border-radius:10px;
-max-width:1100px;
 margin:auto;
+border:5px solid #666;
+border-radius:20px;
 overflow:hidden;
+color:black;
 }
 
-.toptype{
-background:#148f2c;
-color:white;
-font-size:34px;
-font-weight:bold;
-padding:10px;
+.top{
+display:flex;
+height:120px;
+border-bottom:3px solid #666;
 }
 
-.row1{
-display:grid;
-grid-template-columns:1fr 220px 1fr;
-border-bottom:2px solid #ccc;
+.bottom{
+display:flex;
+height:120px;
 }
 
-.row2{
-display:grid;
-grid-template-columns:1fr 220px 1fr;
-}
-
-.box{
-padding:25px;
-}
-
-.arletters{
-font-size:80px;
-font-weight:bold;
-}
-
-.enletters{
-font-size:45px;
-margin-top:10px;
-}
-
-.numbers{
-font-size:95px;
+.numbers,
+.letters{
+width:42%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:65px;
 font-weight:bold;
 }
 
 .logo{
+width:16%;
+border-left:3px solid #666;
+border-right:3px solid #666;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-font-size:80px;
-color:#148f2c;
 font-weight:bold;
 }
 
-.logo small{
-font-size:28px;
-color:black;
+.logo span{
+font-size:30px;
+color:green;
 }
 
-@media(max-width:700px){
-
-.arletters{
-font-size:45px;
-}
-
-.enletters{
-font-size:25px;
-}
-
-.numbers{
+.en{
 font-size:55px;
+letter-spacing:8px;
 }
 
-.logo{
-font-size:45px;
+.num{
+font-size:70px;
 }
 
-.row1,.row2{
-grid-template-columns:1fr 120px 1fr;
+.small{
+font-size:22px;
 }
-
-}
-
 </style>
 </head>
+
 <body>
 
-<h2>مزاد اللوحات المباشر</h2>
+<h1>مزاد اللوحات المباشر</h1>
 
 <div class="controls">
-
-<select id="type">
-<option>خصوصي</option>
-<option>نقل</option>
-</select>
-
-<input id="l1" maxlength="1" placeholder="الحرف الأول">
-<input id="l2" maxlength="1" placeholder="الحرف الثاني">
-<input id="l3" maxlength="1" placeholder="الحرف الثالث">
-
-<input id="num" maxlength="4" placeholder="رقم اللوحة">
-
+<input id="letters" placeholder="مثال: ح ر م">
+<input id="numbers" placeholder="9060">
 <button onclick="showPlate()">عرض</button>
-
 </div>
 
 <div class="plate">
 
-<div class="toptype" id="ptype">
-خصوصي
-</div>
-
-<div class="row1">
-
-<div class="box">
-<div class="arletters" id="arLetters">و و ي</div>
-<div class="enletters" id="enLetters">V U V</div>
-</div>
+<div class="top">
+<div class="letters" id="arLetters">ح ر م</div>
 
 <div class="logo">
-🌴
-⚔️
+<span>🌴</span>
+<div class="small">KSA</div>
 </div>
 
-<div class="box">
-<div class="numbers" id="arNumTop">122</div>
-<div class="enletters" id="enNumTop">122</div>
+<div class="numbers num" id="arNumbers">٩٠٦٠</div>
 </div>
 
-</div>
-
-<div class="row2">
-
-<div class="box"></div>
+<div class="bottom">
+<div class="letters en" id="enLetters">Z R J</div>
 
 <div class="logo">
-<small>المملكة العربية السعودية</small>
+SA
 </div>
 
-<div class="box"></div>
-
+<div class="numbers num" id="enNumbers">9060</div>
 </div>
 
 </div>
 
 <script>
 
-const map={
-'ا':'A',
-'ب':'B',
-'ح':'J',
-'د':'D',
-'ر':'R',
-'س':'S',
-'ص':'X',
-'ط':'T',
-'ع':'E',
-'ق':'G',
-'ك':'K',
-'ل':'L',
-'م':'Z',
-'ن':'N',
-'ه':'H',
-'و':'U',
-'ي':'Y'
+const map = {
+'ا':'A','أ':'A','ب':'B','ح':'J','د':'D',
+'ر':'R','س':'S','ص':'X','ط':'T',
+'ع':'E','ق':'G','ك':'K','ل':'L',
+'م':'Z','ن':'N','ه':'H','و':'U','ي':'V'
 };
 
 function showPlate(){
 
-let a=document.getElementById("l1").value || "";
-let b=document.getElementById("l2").value || "";
-let c=document.getElementById("l3").value || "";
+let ar=document.getElementById("letters").value.trim();
+let nums=document.getElementById("numbers").value.trim();
 
-let num=document.getElementById("num").value || "";
+document.getElementById("arLetters").innerText=ar;
+document.getElementById("arNumbers").innerText=nums;
 
-document.getElementById("ptype").innerText=
-document.getElementById("type").value;
+let eng="";
 
-document.getElementById("arLetters").innerText=
-a+" "+b+" "+c;
+ar.split(" ").forEach(x=>{
+eng += (map[x] || x) + " ";
+});
 
-document.getElementById("enLetters").innerText=
-(map[a]||a)+" "+
-(map[b]||b)+" "+
-(map[c]||c);
-
-document.getElementById("arNumTop").innerText=num;
-document.getElementById("enNumTop").innerText=num;
+document.getElementById("enLetters").innerText=eng.trim();
+document.getElementById("enNumbers").innerText=nums;
 
 }
 
