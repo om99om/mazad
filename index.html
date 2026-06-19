@@ -2,63 +2,184 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>مزاد اللوحات</title>
+
 <style>
+
 body{
-background:#111;
-color:white;
+background:#f5f5f5;
 font-family:tahoma;
 text-align:center;
 padding:20px;
 }
+
+h2{
+margin-bottom:20px;
+}
+
+.controls{
+background:white;
+padding:15px;
+border-radius:15px;
+margin:auto;
+max-width:1000px;
+}
+
 input,select,button{
 padding:10px;
 font-size:20px;
 margin:5px;
+text-align:center;
 }
-.box{
-background:white;
-color:black;
-width:700px;
-margin:auto;
-padding:20px;
-border-radius:15px;
+
+button{
+cursor:pointer;
 }
+
 .plate{
-font-size:50px;
-font-weight:bold;
-margin:20px;
+margin:25px auto;
+background:white;
+border:3px solid #444;
+border-radius:10px;
+width:1000px;
+max-width:100%;
+overflow:hidden;
 }
+
+.row{
+display:grid;
+grid-template-columns:1fr 220px 1fr;
+}
+
+.cell{
+padding:25px;
+font-size:60px;
+font-weight:bold;
+border:1px solid #aaa;
+}
+
+.logo{
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:80px;
+}
+
+.small{
+font-size:40px;
+}
+
 </style>
+
 </head>
+
 <body>
 
-<h1>مزاد اللوحات المباشر</h1>
+<h2>مزاد اللوحات المباشر</h2>
+
+<div class="controls">
 
 <select id="type">
 <option>خصوصي</option>
 <option>نقل</option>
 </select>
 
-<input id="letters" placeholder="الحروف">
-<input id="numbers" placeholder="الأرقام">
+<input id="l1" maxlength="1" placeholder="ح1">
+<input id="l2" maxlength="1" placeholder="ح2">
+<input id="l3" maxlength="1" placeholder="ح3">
+
+<input id="num" placeholder="رقم اللوحة">
 
 <button onclick="showPlate()">عرض</button>
 
-<div class="box">
-<div id="ptype">خصوصي</div>
-<div class="plate" id="plate">أ ب ج 1234</div>
+</div>
+
+<div id="ptype" style="font-size:25px;margin:10px;">
+خصوصي
+</div>
+
+<div class="plate">
+
+<div class="row">
+
+<div class="cell" id="arLetters">
+و ب د
+</div>
+
+<div class="cell logo">
+🌴⚔️
+</div>
+
+<div class="cell small" id="enLetters">
+U B D
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="cell" id="arNum">
+1234
+</div>
+
+<div class="cell logo"></div>
+
+<div class="cell" id="enNum">
+1234
+</div>
+
+</div>
+
 </div>
 
 <script>
+
+const map={
+'ا':'A',
+'ب':'B',
+'ح':'J',
+'د':'D',
+'ر':'R',
+'س':'S',
+'ص':'X',
+'ط':'T',
+'ع':'E',
+'ق':'G',
+'ك':'K',
+'ل':'L',
+'م':'Z',
+'ن':'N',
+'ه':'H',
+'و':'U',
+'ي':'Y'
+};
+
 function showPlate(){
+
+let a=document.getElementById("l1").value;
+let b=document.getElementById("l2").value;
+let c=document.getElementById("l3").value;
+
+let nums=document.getElementById("num").value;
+
 document.getElementById("ptype").innerText=
 document.getElementById("type").value;
 
-document.getElementById("plate").innerText=
-document.getElementById("letters").value + " " +
-document.getElementById("numbers").value;
+document.getElementById("arLetters").innerText=
+a+" "+b+" "+c;
+
+document.getElementById("enLetters").innerText=
+(map[a]||a)+" "+
+(map[b]||b)+" "+
+(map[c]||c);
+
+document.getElementById("arNum").innerText=nums;
+document.getElementById("enNum").innerText=nums;
+
 }
+
 </script>
 
 </body>
