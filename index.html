@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>مزاد اللوحات</title>
+<style>
+body{
+background:#111;
+color:white;
+font-family:tahoma;
+text-align:center;
+padding:20px;
+}
+input,select,button{
+padding:10px;
+font-size:20px;
+margin:5px;
+}
+.box{
+background:white;
+color:black;
+width:700px;
+margin:auto;
+padding:20px;
+border-radius:15px;
+}
+.plate{
+font-size:50px;
+font-weight:bold;
+margin:20px;
+}
+</style>
+</head>
+<body>
+
+<h1>مزاد اللوحات المباشر</h1>
+
+<select id="type">
+<option>خصوصي</option>
+<option>نقل</option>
+</select>
+
+<input id="letters" placeholder="الحروف">
+<input id="numbers" placeholder="الأرقام">
+
+<button onclick="showPlate()">عرض</button>
+
+<div class="box">
+<div id="ptype">خصوصي</div>
+<div class="plate" id="plate">أ ب ج 1234</div>
+</div>
+
+<script>
+function showPlate(){
+document.getElementById("ptype").innerText=
+document.getElementById("type").value;
+
+document.getElementById("plate").innerText=
+document.getElementById("letters").value + " " +
+document.getElementById("numbers").value;
+}
+</script>
+
+</body>
+</html>
